@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Show Revenue Per Head Predictor</title>
+</head>
+<body>
+    <h1>Predict Revenue Per Head</h1>
+
+    <h2>Predict for Single Show:</h2>
+    <form method="POST">
+        <label for="show_date">Show Date (YYYY-MM-DD):</label><br>
+        <input type="date" id="show_date" name="show_date" required><br><br> 
+
+        <label for="artistName">Artist Name:</label><br>
+        <input type="text" id="artistName" name="artistName" required><br><br>
+
+        <label for="Genre">Genre:</label><br>
+        <input type="text" id="Genre" name="Genre" required><br><br>
+
+        <label for="venue name">Venue Name:</label><br>
+        <input type="text" id="venue name" name="venue name" required><br><br>
+
+        <label for="venue city">Venue City:</label><br>
+        <input type="text" id="venue city" name="venue city" required><br><br>
+
+        <label for="venue state">Venue State:</label><br>
+        <input type="text" id="venue state" name="venue state" required><br><br>
+
+        <label for="attendance">Attendance:</label><br>
+        <input type="number" id="attendance" name="attendance" required><br><br>
+
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction %}
+        <h2>Predicted $/head: {{ prediction }}</h2>
+    {% endif %}
+
+    <hr>
+
+    <h2>Predict from CSV:</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="csv_file" accept=".csv" required>
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if table %}
+        <h2>Predicted Results:</h2>
+        {{ table|safe }}
+		<a href="{{ download_url }}" download="predicted_$_per_head.csv">Download Predictions</a>
+    {% endif %}
+</body>
+</html>
